@@ -1,0 +1,82 @@
+/* make the page fit the viewport height and avoid scrolling */
+html, body {
+    height: 100%;
+}
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    overflow-y: auto; /* allow vertical scroll */
+    display: flex;
+    flex-direction: column;
+}
+
+/* smaller, tighter headings so less vertical space is used */
+h1 {
+    color: #0056b3;
+    font-size: 18px;
+    margin: 8px 0;
+}
+h2 {
+    color: #0056b3;
+    font-size: 14px;
+    margin: 6px 0 8px 0;
+}
+
+/* each list becomes a wrapping grid of cards */
+ul.card-grid {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+/* compact card appearance */
+li {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: transform 0.15s;
+    flex: 0 0 220px; /* width of each card */
+    height: 56px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+li:hover { transform: translateY(-3px); }
+
+a.card-link {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-img {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    border-radius: 4px;
+    flex: 0 0 36px;
+    object-fit: contain; /* show the whole favicon without cropping */
+    background: transparent;
+    display: block;
+    align-self: center; /* vertically center inside the flex row */
+}
+
+hr { margin: 8px 0; border: none; border-top: 1px solid #e0e0e0; }
+
+@media (min-width: 1200px) {
+    li { flex: 0 0 180px; height: 52px; }
+    body { padding: 16px; }
+}

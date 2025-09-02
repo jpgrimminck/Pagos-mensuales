@@ -1,0 +1,24 @@
+{
+  "cuentas": [
+    {
+      "label": "Gas",
+      "href": "https://sucursalvirtual.metrogas.cl/procedimiento_de_pago",
+      "favicon": "icons/metrogas.svg"
+    },
+    {
+      "label": "Luz",
+      "href": "https://www.enel.cl/es/clientes/servicios-en-linea/pago-de-cuenta.html",
+      "favicon": "icons/enel.svg"
+    },
+    { "label": "Entel casa", "href": "https://miperfil.entel.cl/CL_Web_Unified_Payment_EU/Detalle_Deuda.aspx", "favicon": "icons/entel.svg" },
+  { "label": "Agua", "href": "https://www.aguasandinas.cl/web/aguasandinas/pagar-mi-cuenta", "favicon": "icons/aguasandinas.svg" },
+  { "label": "Wom celular JP", "href": "https://pagofacilwom.cl/pago_facil/pagarCuenta?U2FsdGVkX1+5YlrtvauwwRw6T6pM77vAv4N26wH+xn7VBm3TnctSZ3lw7N7+otwKJyXzWlx8skhIRu04dqL18Q", "favicon": "icons/wom.svg" },
+  { "label": "Gastos comunes", "href": "https://app.comunidadfeliz.com/online_payments/new?billable=cAImSP%252B9vhCWDSsVB0zwZzFy0w%253D%253D--0hcUYjUOtgY5o8uj--UqpLB%252B2Q%252BMu2NaVqSvVPLw%253D%253D", "favicon": "icons/comunidadfeliz.svg" }
+  ],
+  "auto": [
+  { "label": "Tag Accent Blanco", "href": "https://botonpago.unired.cl/Pago/IniciarFlujoOnline?u=IpqUdjMg1U13M2vDt8VzM3pVj1J8ku570etETcIKX90%3D", "favicon": "icons/car-white-shadow.svg" },
+  { "label": "Tag Accent Rojo", "href": "https://botonpago.unired.cl/Pago/IniciarFlujoOnline?u=4dPznJ%2FauW2CENgTH%2F6seKD90%2FP9R2MsVQZchDUmb9g%3D", "favicon": "icons/car-red-shadow.svg" },
+  { "label": "Estacionamiento Duqueco Accent Blanco", "href": "https://sitiospublicos.bancochile.cl/personas", "favicon": "icons/bancochile.svg" },
+  { "label": "Arriendo Accent Rojo", "href": "https://sitiospublicos.bancochile.cl/personas", "favicon": "icons/bancochile.svg" }
+  ]
+}

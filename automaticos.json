@@ -1,0 +1,12 @@
+{
+  "pagos": [
+    { "label": "Crédito Banco de Chile", "href": "#", "favicon": "placeholder.jpg" },
+    { "label": "Adobe Suite", "href": "#", "favicon": "placeholder.jpg" },
+    { "label": "Netflix", "href": "#", "favicon": "placeholder.jpg" },
+    { "label": "Youtube Premium", "href": "#", "favicon": "placeholder.jpg" },
+    { "label": "Google Play", "href": "#", "favicon": "placeholder.jpg" }
+  ],
+  "auto": [
+    { "label": "Seguro Accent blanco", "href": "#", "favicon": "placeholder.jpg" }
+  ]
+}
