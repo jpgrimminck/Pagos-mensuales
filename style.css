@@ -44,7 +44,6 @@ li {
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     transition: transform 0.15s;
-<<<<<<< HEAD
     flex: 1 0 240px;
     min-height: 56px;
     display: flex;
@@ -53,13 +52,6 @@ li {
     gap: 10px;
     overflow: hidden;
     padding-right: 8px;
-=======
-    flex: 0 0 220px; /* width of each card */
-    height: 56px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
->>>>>>> origin/main
 }
 li:hover { transform: translateY(-3px); }
 
@@ -70,13 +62,10 @@ a.card-link {
     align-items: center;
     padding: 8px 10px;
     width: 100%;
-<<<<<<< HEAD
     flex: 1;
     box-sizing: border-box;
     min-width: 0;
-=======
     box-sizing: border-box;
->>>>>>> origin/main
 }
 
 .card-img {
@@ -93,7 +82,6 @@ a.card-link {
 
 hr { margin: 8px 0; border: none; border-top: 1px solid #e0e0e0; }
 
-<<<<<<< HEAD
 .card-status {
     display: flex;
     align-items: center;
@@ -130,9 +118,7 @@ hr { margin: 8px 0; border: none; border-top: 1px solid #e0e0e0; }
 
 @media (min-width: 1200px) {
     li { flex: 1 0 200px; min-height: 52px; }
-=======
 @media (min-width: 1200px) {
     li { flex: 0 0 180px; height: 52px; }
->>>>>>> origin/main
     body { padding: 16px; }
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const STATUS_STORAGE_KEY = 'manualCardStatus.v1';
 let manualStatus = {};
 
@@ -32,20 +31,14 @@ function updateStatusPill(pill, isPaid) {
   pill.classList.toggle('is-paid', isPaid);
 }
 
-=======
->>>>>>> origin/main
 async function loadJSON(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
   return res.json();
 }
 
-<<<<<<< HEAD
 function createCard(item, options = {}) {
   const { withStatus = false } = options;
-=======
-function createCard(item) {
->>>>>>> origin/main
   const li = document.createElement('li');
   const a = document.createElement('a');
   a.className = 'card-link';
@@ -72,7 +65,6 @@ function createCard(item) {
   span.textContent = item.label || item.name || '';
   a.appendChild(span);
   li.appendChild(a);
-<<<<<<< HEAD
 
   if (withStatus) {
     const statusKey = makeStatusKey(item);
@@ -109,8 +101,6 @@ function createCard(item) {
     li.appendChild(statusWrap);
   }
 
-=======
->>>>>>> origin/main
   return li;
 }
 
@@ -118,7 +108,6 @@ async function render() {
   try {
     const auto = await loadJSON('automaticos.json');
     const manual = await loadJSON('manuales.json');
-<<<<<<< HEAD
     manualStatus = loadStatusMap();
 
     // expect arrays: auto.pagos, auto.auto, manual.cuentas, manual.auto
@@ -127,7 +116,6 @@ async function render() {
       if (!container) return;
       container.innerHTML = '';
       arr.forEach(it => container.appendChild(createCard(it, opts)));
-=======
 
     // expect arrays: auto.pagos, auto.auto, manual.cuentas, manual.auto
     const mount = (arr, selector) => {
@@ -135,18 +123,14 @@ async function render() {
       if (!container) return;
       container.innerHTML = '';
       arr.forEach(it => container.appendChild(createCard(it)));
->>>>>>> origin/main
     };
 
     mount(auto.pagos || [], 'automaticos');
     mount(auto.auto || [], 'automaticos-auto');
-<<<<<<< HEAD
     mount(manual.cuentas || [], 'manuales', { withStatus: true });
     mount(manual.auto || [], 'manuales-auto', { withStatus: true });
-=======
     mount(manual.cuentas || [], 'manuales');
     mount(manual.auto || [], 'manuales-auto');
->>>>>>> origin/main
 
   } catch (err) {
     console.error(err);
