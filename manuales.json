@@ -1,0 +1,25 @@
+{
+  "cuentas": [
+    {
+      "label": "Gas",
+      "href": "https://sucursalvirtual.metrogas.cl/procedimiento_de_pago",
+      "favicon": "icons/metrogas.svg"
+    },
+    {
+      "label": "Luz",
+      "href": "https://www.enel.cl/es/clientes/servicios-en-linea/pago-de-cuenta.html",
+      "favicon": "icons/enel.svg"
+    },
+  { "label": "Entel casa", "href": "https://miperfil.entel.cl/CL_Web_Unified_Payment_EU/?_gl=1*17aiiwl*_gcl_aw*R0NMLjE3MzI1NTEwMzcuQ2p3S0NBaUEzWkM2QmhCYUVpd0FlcWZ2eWpkUENNZExJWURWbXQ0b2FVREJDang1THZYWFdvZ21KaXJtWEo2Q1pkb1A2bHBqZUt4TElSb0NkSWtRQXZEX0J3RQ..*_gcl_dc*R0NMLjE3MzI1NTEwMzcuQ2p3S0NBaUEzWkM2QmhCYUVpd0FlcWZ2eWpkUENNZExJWURWbXQ0b2FVREJDang1THZYWFdvZ21KaXJtWEo2Q1pkb1A2bHBqZUt4TElSb0NkSWtRQXZEX0J3RQ..*_gcl_au*NzQ5MTk5NzY0LjE3MzM5NDM4NTM.*_ga*OTE1NDE4NzIyLjE3MjYxNjY3NzU.*_ga_JQQNLHQ56E*MTczOTg0MTQ5OC40MzUuMS4xNzM5ODQxNTY0LjU3LjAuMA..*_fplc*TVNYTXVWT0psMHpGNWdvV2w3aVBHUENVeTVkTFUlMkZlWlFWSTRud2R1N1N5RlJpRnpTNmVJdGtPWHRKMlNLSDFqc1VoYkhIcGttYm1tVUV2UjBUNlJ1b1poQzBrT3FSV2dEQm9MaiUyRkpnN3c5UERvNzNHako4QzhBZkMxZ0JsdyUzRCUzRA..*_ga_81THXQLWFY*MTczOTg0MTQ2NC4xOTQuMS4xNzM5ODQxNTYyLjU5LjAuMA..", "favicon": "icons/entel.svg" },
+  { "label": "Agua", "href": "https://www.aguasandinas.cl/web/aguasandinas/pagar-mi-cuenta", "favicon": "icons/aguasandinas.svg" },
+  { "label": "Wom celular JP", "href": "https://pagofacilwom.cl/pago_facil/pagarCuenta?U2FsdGVkX1+5YlrtvauwwRw6T6pM77vAv4N26wH+xn7VBm3TnctSZ3lw7N7+otwKJyXzWlx8skhIRu04dqL18Q", "favicon": "icons/wom.svg" },
+  { "label": "Salud Juan Pablo", "href": "https://www.previred.com/wPortal/login/login.jsp", "favicon": "icons/salud-jp.svg" },
+  { "label": "Gastos comunes", "href": "https://app.comunidadfeliz.com/online_payments/new?billable=cAImSP%252B9vhCWDSsVB0zwZzFy0w%253D%253D--0hcUYjUOtgY5o8uj--UqpLB%252B2Q%252BMu2NaVqSvVPLw%253D%253D", "favicon": "icons/comunidadfeliz.svg" }
+  ],
+  "auto": [
+  { "label": "Tag Accent Blanco", "href": "https://botonpago.unired.cl/Pago/IniciarFlujoOnline?u=IpqUdjMg1U13M2vDt8VzM3pVj1J8ku570etETcIKX90%3D", "favicon": "icons/car-white-shadow.svg" },
+  { "label": "Tag Accent Rojo", "href": "https://botonpago.unired.cl/Pago/IniciarFlujoOnline?u=4dPznJ%2FauW2CENgTH%2F6seKD90%2FP9R2MsVQZchDUmb9g%3D", "favicon": "icons/car-red-shadow.svg" },
+  { "label": "Estacionamiento Duqueco Accent Blanco", "href": "https://sitiospublicos.bancochile.cl/personas", "favicon": "icons/bancochile.svg" },
+  { "label": "Arriendo Accent Rojo", "href": "https://sitiospublicos.bancochile.cl/personas", "favicon": "icons/bancochile.svg" }
+  ]
+}
