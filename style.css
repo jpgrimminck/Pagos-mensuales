@@ -21,17 +21,18 @@ h1 {
     font-size: 18px;
     margin: 8px 0;
 }
+
 h2 {
     color: #0056b3;
     font-size: 14px;
-    margin: 6px 0 8px 0;
+    margin: 6px 0 8px;
 }
 
 /* each list becomes a wrapping grid of cards */
 ul.card-grid {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -42,7 +43,7 @@ ul.card-grid {
 li {
     background-color: #fff;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     transition: transform 0.15s;
     flex: 1 0 240px;
     min-height: 56px;
@@ -53,7 +54,10 @@ li {
     overflow: hidden;
     padding-right: 8px;
 }
-li:hover { transform: translateY(-3px); }
+
+li:hover {
+    transform: translateY(-3px);
+}
 
 a.card-link {
     text-decoration: none;
@@ -65,7 +69,6 @@ a.card-link {
     flex: 1;
     box-sizing: border-box;
     min-width: 0;
-    box-sizing: border-box;
 }
 
 .card-img {
@@ -80,7 +83,11 @@ a.card-link {
     align-self: center; /* vertically center inside the flex row */
 }
 
-hr { margin: 8px 0; border: none; border-top: 1px solid #e0e0e0; }
+hr {
+    margin: 8px 0;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+}
 
 .card-status {
     display: flex;
@@ -117,8 +124,12 @@ hr { margin: 8px 0; border: none; border-top: 1px solid #e0e0e0; }
 }
 
 @media (min-width: 1200px) {
-    li { flex: 1 0 200px; min-height: 52px; }
-@media (min-width: 1200px) {
-    li { flex: 0 0 180px; height: 52px; }
-    body { padding: 16px; }
+    li {
+        flex: 1 0 200px;
+        min-height: 52px;
+    }
+
+    body {
+        padding: 16px;
+    }
 }

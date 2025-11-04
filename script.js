@@ -111,26 +111,17 @@ async function render() {
     manualStatus = loadStatusMap();
 
     // expect arrays: auto.pagos, auto.auto, manual.cuentas, manual.auto
-    const mount = (arr, selector, opts) => {
+    const mount = (arr, selector, opts = {}) => {
       const container = document.getElementById(selector);
       if (!container) return;
       container.innerHTML = '';
-      arr.forEach(it => container.appendChild(createCard(it, opts)));
-
-    // expect arrays: auto.pagos, auto.auto, manual.cuentas, manual.auto
-    const mount = (arr, selector) => {
-      const container = document.getElementById(selector);
-      if (!container) return;
-      container.innerHTML = '';
-      arr.forEach(it => container.appendChild(createCard(it)));
+      arr.forEach(item => container.appendChild(createCard(item, opts)));
     };
 
     mount(auto.pagos || [], 'automaticos');
     mount(auto.auto || [], 'automaticos-auto');
     mount(manual.cuentas || [], 'manuales', { withStatus: true });
     mount(manual.auto || [], 'manuales-auto', { withStatus: true });
-    mount(manual.cuentas || [], 'manuales');
-    mount(manual.auto || [], 'manuales-auto');
 
   } catch (err) {
     console.error(err);
