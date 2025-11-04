@@ -14,6 +14,7 @@
   { "label": "Agua", "href": "https://www.aguasandinas.cl/web/aguasandinas/pagar-mi-cuenta", "favicon": "icons/aguasandinas.svg" },
   { "label": "Wom celular JP", "href": "https://pagofacilwom.cl/pago_facil/pagarCuenta?U2FsdGVkX1+5YlrtvauwwRw6T6pM77vAv4N26wH+xn7VBm3TnctSZ3lw7N7+otwKJyXzWlx8skhIRu04dqL18Q", "favicon": "icons/wom.svg" },
   { "label": "Salud Juan Pablo", "href": "https://www.previred.com/wPortal/login/login.jsp", "favicon": "icons/salud-jp.svg" },
+  { "label": "Sunny Kids", "href": "https://sitiospublicos.bancochile.cl/personas", "favicon": "icons/sunny-kids.svg" },
   { "label": "Gastos comunes", "href": "https://app.comunidadfeliz.com/online_payments/new?billable=cAImSP%252B9vhCWDSsVB0zwZzFy0w%253D%253D--0hcUYjUOtgY5o8uj--UqpLB%252B2Q%252BMu2NaVqSvVPLw%253D%253D", "favicon": "icons/comunidadfeliz.svg" }
   ],
   "auto": [
