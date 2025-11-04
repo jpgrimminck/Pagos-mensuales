@@ -41,10 +41,11 @@ ul.card-grid {
 
 /* compact card appearance */
 li {
-    background-color: #fff;
+    background-color: #f44336;
+    color: #fff;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    transition: transform 0.15s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s, background-color 0.2s ease, color 0.2s ease;
     flex: 1 0 240px;
     min-height: 56px;
     display: flex;
@@ -59,9 +60,13 @@ li:hover {
     transform: translateY(-3px);
 }
 
+.card--paid {
+    background-color: #2e7d32;
+}
+
 a.card-link {
     text-decoration: none;
-    color: #333;
+    color: inherit;
     display: flex;
     align-items: center;
     padding: 8px 10px;
@@ -94,33 +99,42 @@ hr {
     align-items: center;
     gap: 6px;
     white-space: nowrap;
-    margin-right: 4px;
+    margin-left: auto;
     flex-shrink: 0;
 }
 
 .card-status input[type="checkbox"] {
     cursor: pointer;
-    accent-color: #0056b3;
-}
-
-.card-status label {
-    font-size: 12px;
-    color: #444;
-    cursor: pointer;
+    accent-color: #f1f1f1;
+    transform: scale(1.6);
+    margin-left: 2px;
 }
 
 .card-status-pill {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.3px;
-    padding: 2px 8px;
+    letter-spacing: 0.4px;
+    padding: 4px 10px;
     border-radius: 999px;
-    background-color: #f44336;
+    background-color: rgba(255, 255, 255, 0.25);
     color: #fff;
+    text-transform: uppercase;
 }
 
 .card-status-pill.is-paid {
-    background-color: #2e7d32;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.card--paid {
+    color: #fff;
+}
+
+.card--paid .card-status input[type="checkbox"] {
+    accent-color: #ffffff;
+}
+
+.card--paid .card-status-pill {
+    background-color: rgba(255, 255, 255, 0.35);
 }
 
 @media (min-width: 1200px) {

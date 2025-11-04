@@ -27,7 +27,7 @@ function makeStatusKey(item) {
 }
 
 function updateStatusPill(pill, isPaid) {
-  pill.textContent = isPaid ? 'Pagado' : 'Pendiente';
+  pill.textContent = isPaid ? 'Pagada' : 'Pendiente';
   pill.classList.toggle('is-paid', isPaid);
 }
 
@@ -75,10 +75,8 @@ function createCard(item, options = {}) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = checkboxId;
-
-    const label = document.createElement('label');
-    label.setAttribute('for', checkboxId);
-    label.textContent = 'Pagado';
+    checkbox.setAttribute('aria-label', `Marcar ${item.label || 'cuenta'} como pagada`);
+    checkbox.title = 'Marcar como pagada';
 
     const pill = document.createElement('span');
     pill.className = 'card-status-pill';
@@ -86,6 +84,7 @@ function createCard(item, options = {}) {
     const isPaid = !!manualStatus[statusKey];
     checkbox.checked = isPaid;
     updateStatusPill(pill, isPaid);
+    li.classList.toggle('card--paid', isPaid);
 
     checkbox.addEventListener('change', () => {
       if (checkbox.checked) {
@@ -94,10 +93,11 @@ function createCard(item, options = {}) {
         delete manualStatus[statusKey];
       }
       updateStatusPill(pill, checkbox.checked);
+      li.classList.toggle('card--paid', checkbox.checked);
       saveStatusMap();
     });
 
-    statusWrap.append(checkbox, label, pill);
+    statusWrap.append(pill, checkbox);
     li.appendChild(statusWrap);
   }
 
