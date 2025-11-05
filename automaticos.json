@@ -1,12 +1,14 @@
 {
   "pagos": [
-    { "label": "Crédito Banco de Chile", "href": "#", "favicon": "placeholder.jpg" },
-    { "label": "Adobe Suite", "href": "#", "favicon": "placeholder.jpg" },
-    { "label": "Netflix", "href": "#", "favicon": "placeholder.jpg" },
-    { "label": "Youtube Premium", "href": "#", "favicon": "placeholder.jpg" },
-    { "label": "Google Play", "href": "#", "favicon": "placeholder.jpg" }
+    { "label": "GitHub", "href": "https://github.com/settings/billing", "favicon": "icons/github.svg" },
+    { "label": "ChatGPT", "href": "https://chat.openai.com/", "favicon": "icons/chatgpt.svg" },
+  { "label": "Adobe Suite", "href": "#", "favicon": "icons/adobe.svg" },
+  { "label": "Netflix", "href": "#", "favicon": "icons/netflix.svg" },
+  { "label": "Youtube Premium", "href": "#", "favicon": "icons/youtube.svg" },
+  { "label": "Google Play", "href": "#", "favicon": "icons/googleplay.svg" }
   ],
   "auto": [
-    { "label": "Seguro Accent blanco", "href": "#", "favicon": "placeholder.jpg" }
+  { "label": "Seguro Accent blanco", "href": "#", "favicon": "icons/seguro-auto.svg" },
+    { "label": "Seguro catastrófico", "href": "#", "favicon": "icons/seguro-catastrofico.svg" }
   ]
 }

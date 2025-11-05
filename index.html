@@ -8,6 +8,21 @@
 </head>
 <body>
 
+    <header class="page-header">
+        <div class="pending-banner" aria-live="polite">
+            <span class="pending-banner__label">Pendientes</span>
+            <span id="pending-count" class="pending-banner__value">0</span>
+        </div>
+        <div class="page-header__date">
+            <span id="date-day-number" class="date-number">--</span>
+            <div class="date-meta">
+                <span id="date-day-name" class="date-meta__day">---</span>
+                <span id="date-month-name" class="date-meta__month">---</span>
+            </div>
+        </div>
+        <button id="reset-status-btn" class="reset-btn" type="button">Borrar registros</button>
+    </header>
+
     <h1>AUTOMÁTICO</h1>
 
     <h2>Pagos y Suscripciones</h2>

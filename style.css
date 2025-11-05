@@ -15,6 +15,101 @@ body {
     flex-direction: column;
 }
 
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.pending-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    background-color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(208, 66, 66, 0.18);
+    border: 1px solid rgba(208, 66, 66, 0.25);
+    min-width: 140px;
+}
+
+.pending-banner__label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #d32f2f;
+}
+
+.pending-banner__value {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    color: #b71c1c;
+}
+
+.page-header__date {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.date-number {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    color: #0056b3;
+}
+
+.date-meta {
+    display: flex;
+    flex-direction: column;
+    color: #0056b3;
+    text-transform: capitalize;
+}
+
+.date-meta__day {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.date-meta__month {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.reset-btn {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(244, 67, 54, 0.25);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.reset-btn:hover {
+    background-color: #d32f2f;
+}
+
+.reset-btn:active {
+    transform: translateY(1px);
+}
+
+.reset-btn:focus-visible {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
 /* smaller, tighter headings so less vertical space is used */
 h1 {
     color: #0056b3;
@@ -127,10 +222,6 @@ hr {
 .card-status-pill.is-paid {
     background-color: rgba(255, 255, 255, 0.35);
     color: #ffffff;
-}
-
-.card--paid {
-    color: #fff;
 }
 
 .card--paid .card-status input[type="checkbox"] {
