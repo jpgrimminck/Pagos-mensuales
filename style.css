@@ -47,6 +47,17 @@ body {
     min-width: 140px;
 }
 
+.counters-wrapper {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+}
+
+.counter-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .pending-banner__label {
     font-size: 12px;
     font-weight: 600;
@@ -60,6 +71,14 @@ body {
     font-weight: 700;
     line-height: 1;
     color: #b71c1c;
+}
+
+.paid-label {
+    color: #2e7d32;
+}
+
+.paid-value {
+    color: #1b5e20;
 }
 
 .page-header__date {

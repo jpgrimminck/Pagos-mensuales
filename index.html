@@ -10,8 +10,16 @@
 
     <header class="page-header">
         <div class="pending-banner" aria-live="polite">
-            <span class="pending-banner__label">Pendientes</span>
-            <span id="pending-count" class="pending-banner__value">0</span>
+            <div class="counters-wrapper">
+                <div class="counter-group">
+                    <span class="pending-banner__label paid-label">Pagados</span>
+                    <span id="paid-count" class="pending-banner__value paid-value">0</span>
+                </div>
+                <div class="counter-group">
+                    <span class="pending-banner__label">Pendientes</span>
+                    <span id="pending-count" class="pending-banner__value">0</span>
+                </div>
+            </div>
             <div class="total-banner">
                 <span class="total-banner__label">Total</span>
                 <span id="total-amount" class="total-banner__value">$ 0</span>

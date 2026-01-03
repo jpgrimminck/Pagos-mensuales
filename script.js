@@ -88,14 +88,27 @@ function updateStatusPill(pill, isPaid, amount) {
 }
 
 function updatePendingCounter() {
-  const counterEl = document.getElementById('pending-count');
-  if (!counterEl) return;
+  const pendingEl = document.getElementById('pending-count');
+  const paidEl = document.getElementById('paid-count');
+
+  if (!pendingEl) return;
+
   const checkboxes = document.querySelectorAll('.card-status input[type="checkbox"]');
   let pending = 0;
+  let paid = 0;
+
   checkboxes.forEach(checkbox => {
-    if (!checkbox.checked) pending += 1;
+    if (checkbox.checked) {
+      paid += 1;
+    } else {
+      pending += 1;
+    }
   });
-  counterEl.textContent = pending;
+
+  pendingEl.textContent = pending;
+  if (paidEl) {
+    paidEl.textContent = paid;
+  }
 }
 
 function updateTotalSum() {
