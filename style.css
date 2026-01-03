@@ -312,7 +312,16 @@ li.is-editing .card-status {
     gap: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     flex: 0 0 auto; /* Don't shrink, don't grow */
-    min-width: 140px;
+    min-width: auto;
+}
+
+.top-payment-rank {
+    font-size: 14px;
+    font-weight: 800;
+    color: #999;
+    margin-right: 4px;
+    min-width: 16px;
+    text-align: center;
 }
 
 .top-payment-icon {

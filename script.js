@@ -71,9 +71,16 @@ function makeStatusKey(item) {
   return composed.replace(/^-+|-+$/g, '') || `item-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+function formatMoney(amount) {
+  if (!amount) return '';
+  const num = parseInt(amount, 10);
+  if (isNaN(num)) return amount;
+  return num.toLocaleString('es-CL');
+}
+
 function updateStatusPill(pill, isPaid, amount) {
   if (isPaid) {
-    pill.textContent = amount ? `$ ${amount}` : 'Pagada';
+    pill.textContent = amount ? `$ ${formatMoney(amount)}` : 'Pagada';
   } else {
     pill.textContent = 'Pendiente';
   }
@@ -327,26 +334,28 @@ function updateTopPayments() {
         label: item ? (item.label || item.name) : 'Unknown',
         svg: item ? item.svg : null,
         img: item ? (item.favicon || item.img) : null,
-        formattedAmount: status.amount
+        formattedAmount: formatMoney(status.amount)
       };
     });
 
   // Sort by amount desc
   paidItems.sort((a, b) => b.amount - a.amount);
 
-  // Take top 3
-  const top3 = paidItems.slice(0, 3);
-
   container.innerHTML = '';
-  if (top3.length === 0) {
+  if (paidItems.length === 0) {
     container.style.display = 'none';
     return;
   }
   container.style.display = 'flex';
 
-  top3.forEach(item => {
+  paidItems.forEach((item, index) => {
     const div = document.createElement('div');
     div.className = 'top-payment-card';
+    
+    // Rank
+    const rankDiv = document.createElement('div');
+    rankDiv.className = 'top-payment-rank';
+    rankDiv.textContent = index + 1;
     
     // Icon
     const iconDiv = document.createElement('div');
@@ -371,7 +380,7 @@ function updateTopPayments() {
     labelSpan.textContent = item.label;
     
     infoDiv.append(amountSpan, labelSpan);
-    div.append(iconDiv, infoDiv);
+    div.append(rankDiv, iconDiv, infoDiv);
     container.appendChild(div);
   });
 }
