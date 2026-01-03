@@ -1,5 +1,6 @@
 const STATUS_STORAGE_KEY = 'manualCardStatus.v2';
 let cardStatus = {};
+let itemsRegistry = {};
 
 function getCurrentMonthKey(date = new Date()) {
   const year = date.getFullYear();
@@ -69,8 +70,12 @@ function makeStatusKey(item) {
   return composed.replace(/^-+|-+$/g, '') || `item-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-function updateStatusPill(pill, isPaid) {
-  pill.textContent = isPaid ? 'Pagada' : 'Pendiente';
+function updateStatusPill(pill, isPaid, amount) {
+  if (isPaid) {
+    pill.textContent = amount ? `$ ${amount}` : 'Pagada';
+  } else {
+    pill.textContent = 'Pendiente';
+  }
   pill.classList.toggle('is-paid', isPaid);
 }
 
@@ -122,8 +127,21 @@ function createCard(item, options = {}) {
 
   if (withStatus) {
     const statusKey = makeStatusKey(item);
+    itemsRegistry[statusKey] = item;
     const statusWrap = document.createElement('div');
     statusWrap.className = 'card-status';
+
+    // Retrieve and normalize status data
+    let stored = cardStatus[statusKey];
+    // If stored is just "true" (legacy), treat as { paid: true, amount: null }
+    // If stored is undefined, treat as { paid: false, amount: null }
+    // If stored is object, use it.
+    let data = { paid: false, amount: null };
+    if (stored === true) {
+      data = { paid: true, amount: null };
+    } else if (typeof stored === 'object' && stored !== null) {
+      data = { ...stored };
+    }
 
     const checkboxId = `status-${statusKey}`;
     const checkbox = document.createElement('input');
@@ -131,32 +149,186 @@ function createCard(item, options = {}) {
     checkbox.id = checkboxId;
     checkbox.setAttribute('aria-label', `Marcar ${item.label || 'cuenta'} como pagada`);
     checkbox.title = 'Marcar como pagada';
+    checkbox.checked = data.paid;
 
     const pill = document.createElement('span');
     pill.className = 'card-status-pill';
+    updateStatusPill(pill, data.paid, data.amount);
 
-    const isPaid = !!cardStatus[statusKey];
-    checkbox.checked = isPaid;
-    updateStatusPill(pill, isPaid);
-    li.classList.toggle('card--paid', isPaid);
+    // Input for amount
+    const amountInput = document.createElement('input');
+    amountInput.type = 'number';
+    amountInput.className = 'amount-input';
+    amountInput.placeholder = '$';
+    amountInput.style.display = 'none'; // hidden by default
+
+    // Save button
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'save-btn';
+    saveBtn.textContent = 'Guardar';
+    saveBtn.type = 'button';
+    saveBtn.style.display = 'none'; // hidden by default
+
+    li.classList.toggle('card--paid', data.paid);
+
+    // Helper to save current state
+    const persist = () => {
+      if (data.paid) {
+        cardStatus[statusKey] = data;
+      } else {
+        // If not paid, we still want to keep the amount if it exists?
+        // The requirement says: "si le saco el check y vuelvo a activarlo, no me debe preguntar por el monto"
+        // So we must persist the amount even if paid is false.
+        // But previously we were deleting the key.
+        // Let's store it with paid: false.
+        cardStatus[statusKey] = data;
+      }
+      saveStatusMap();
+      updatePendingCounter();
+      updateTopPayments();
+    };
 
     checkbox.addEventListener('change', () => {
       if (checkbox.checked) {
-        cardStatus[statusKey] = true;
+        // User checked the box
+        if (data.amount) {
+          // We have a stored amount, just restore it
+          data.paid = true;
+          updateStatusPill(pill, true, data.amount);
+          li.classList.toggle('card--paid', true);
+          persist();
+        } else {
+          // No stored amount, ask for it
+          pill.style.display = 'none';
+          amountInput.style.display = 'inline-block';
+          saveBtn.style.display = 'inline-block';
+          li.classList.add('is-editing');
+          amountInput.focus();
+          // Note: we don't set data.paid = true yet, or maybe we do but we wait for amount?
+          // If user checks but doesn't save amount, what happens?
+          // Let's assume we mark it as paid visually but wait for amount to finalize?
+          // Or better: don't mark as paid fully until saved?
+          // But the checkbox is checked.
+          // Let's keep checkbox checked.
+        }
       } else {
-        delete cardStatus[statusKey];
+        // User unchecked
+        data.paid = false;
+        updateStatusPill(pill, false, data.amount);
+        li.classList.toggle('card--paid', false);
+        
+        // Hide input/save if they were open
+        amountInput.style.display = 'none';
+        saveBtn.style.display = 'none';
+        pill.style.display = 'inline-block'; // Show pill again
+        li.classList.remove('is-editing');
+        
+        persist();
       }
-      updateStatusPill(pill, checkbox.checked);
-      li.classList.toggle('card--paid', checkbox.checked);
-      saveStatusMap();
-      updatePendingCounter();
     });
 
-    statusWrap.append(pill, checkbox);
+    saveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation(); // prevent triggering other clicks if any
+      const val = amountInput.value.trim();
+      if (!val) {
+        alert('Por favor ingresa un monto');
+        return;
+      }
+      data.amount = val;
+      data.paid = true;
+      
+      // Update UI
+      amountInput.style.display = 'none';
+      saveBtn.style.display = 'none';
+      pill.style.display = 'inline-block';
+      li.classList.remove('is-editing');
+      
+      updateStatusPill(pill, true, data.amount);
+      li.classList.toggle('card--paid', true);
+      
+      persist();
+    });
+
+    // Allow pressing Enter in input
+    amountInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        saveBtn.click();
+      }
+    });
+    
+    // Prevent clicking input/button from toggling the link if it bubbled (though they are in statusWrap)
+    amountInput.addEventListener('click', e => e.preventDefault());
+
+    statusWrap.append(pill, amountInput, saveBtn, checkbox);
     li.appendChild(statusWrap);
   }
 
   return li;
+}
+
+function updateTopPayments() {
+  const container = document.getElementById('top-payments');
+  if (!container) return;
+  
+  // Filter paid items with amount
+  const paidItems = Object.entries(cardStatus)
+    .filter(([key, status]) => status && status.paid && status.amount)
+    .map(([key, status]) => {
+      const item = itemsRegistry[key];
+      return {
+        key,
+        amount: parseInt(status.amount, 10) || 0,
+        label: item ? (item.label || item.name) : 'Unknown',
+        svg: item ? item.svg : null,
+        img: item ? (item.favicon || item.img) : null,
+        formattedAmount: status.amount
+      };
+    });
+
+  // Sort by amount desc
+  paidItems.sort((a, b) => b.amount - a.amount);
+
+  // Take top 3
+  const top3 = paidItems.slice(0, 3);
+
+  container.innerHTML = '';
+  if (top3.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = 'flex';
+
+  top3.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'top-payment-card';
+    
+    // Icon
+    const iconDiv = document.createElement('div');
+    iconDiv.className = 'top-payment-icon';
+    if (item.svg) {
+        iconDiv.innerHTML = item.svg;
+    } else if (item.img) {
+        const img = document.createElement('img');
+        img.src = item.img;
+        iconDiv.appendChild(img);
+    }
+    
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'top-payment-info';
+    
+    const amountSpan = document.createElement('span');
+    amountSpan.className = 'top-payment-amount';
+    amountSpan.textContent = `$ ${item.formattedAmount}`;
+    
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'top-payment-label';
+    labelSpan.textContent = item.label;
+    
+    infoDiv.append(amountSpan, labelSpan);
+    div.append(iconDiv, infoDiv);
+    container.appendChild(div);
+  });
 }
 
 async function render() {
@@ -184,6 +356,7 @@ async function render() {
     mount(manual.auto || [], 'manuales-auto', { withStatus: true });
 
     updatePendingCounter();
+    updateTopPayments();
   } catch (err) {
     console.error(err);
   }
@@ -195,6 +368,7 @@ function resetAllStatuses() {
   cardStatus = {};
   saveStatusMap();
   render();
+  updateTopPayments();
 }
 
 function init() {
