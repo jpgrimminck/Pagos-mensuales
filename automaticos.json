@@ -11,4 +11,8 @@
   { "label": "Seguro Accent blanco", "href": "#", "favicon": "icons/seguro-auto.svg" },
     { "label": "Seguro catastrófico", "href": "#", "favicon": "icons/seguro-catastrofico.svg" }
   ]
+  ,
+  "anuales": [
+    { "label": "Google Drive (Tere)", "href": "https://drive.google.com/drive", "favicon": "icons/google-drive.svg", "period": "anual" }
+  ]
 }

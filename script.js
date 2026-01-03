@@ -179,6 +179,7 @@ async function render() {
 
     mount(auto.pagos || [], 'automaticos', { withStatus: true });
     mount(auto.auto || [], 'automaticos-auto', { withStatus: true });
+    mount(auto.anuales || [], 'automaticos-anuales', { withStatus: true });
     mount(manual.cuentas || [], 'manuales', { withStatus: true });
     mount(manual.auto || [], 'manuales-auto', { withStatus: true });
 

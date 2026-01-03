@@ -22,5 +22,8 @@
   { "label": "Tag Accent Rojo", "href": "https://botonpago.unired.cl/Pago/IniciarFlujoOnline?u=4dPznJ%2FauW2CENgTH%2F6seKD90%2FP9R2MsVQZchDUmb9g%3D", "favicon": "icons/car-red-shadow.svg" },
   { "label": "Estacionamiento Duqueco Accent Blanco", "href": "https://sitiospublicos.bancochile.cl/personas", "favicon": "icons/bancochile.svg" },
   { "label": "Arriendo Accent Rojo", "href": "https://sitiospublicos.bancochile.cl/personas", "favicon": "icons/bancochile.svg" }
+  ],
+  "anuales": [
+    { "label": "Google Drive (Tere)", "href": "https://drive.google.com/drive", "favicon": "icons/google-drive.svg", "period": "anual" }
   ]
 }
