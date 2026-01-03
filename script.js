@@ -1,6 +1,7 @@
 const STATUS_STORAGE_KEY = 'manualCardStatus.v2';
 let cardStatus = {};
 let itemsRegistry = {};
+let isDeleteMode = false;
 
 function getCurrentMonthKey(date = new Date()) {
   const year = date.getFullYear();
@@ -90,6 +91,21 @@ function updatePendingCounter() {
   counterEl.textContent = pending;
 }
 
+function updateTotalSum() {
+  const totalEl = document.getElementById('total-amount');
+  if (!totalEl) return;
+  
+  let total = 0;
+  Object.values(cardStatus).forEach(status => {
+    if (status && status.paid && status.amount) {
+      total += parseInt(status.amount, 10) || 0;
+    }
+  });
+  
+  // Format with thousands separator
+  totalEl.textContent = `$ ${total.toLocaleString('es-CL')}`;
+}
+
 async function loadJSON(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
@@ -151,6 +167,16 @@ function createCard(item, options = {}) {
     checkbox.title = 'Marcar como pagada';
     checkbox.checked = data.paid;
 
+    if (data.amount) {
+      checkbox.style.display = 'none';
+    }
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-record-btn';
+    deleteBtn.innerHTML = '&times;';
+    deleteBtn.title = 'Eliminar registro';
+    deleteBtn.type = 'button';
+
     const pill = document.createElement('span');
     pill.className = 'card-status-pill';
     updateStatusPill(pill, data.paid, data.amount);
@@ -186,6 +212,7 @@ function createCard(item, options = {}) {
       saveStatusMap();
       updatePendingCounter();
       updateTopPayments();
+      updateTotalSum();
     };
 
     checkbox.addEventListener('change', () => {
@@ -244,6 +271,8 @@ function createCard(item, options = {}) {
       pill.style.display = 'inline-block';
       li.classList.remove('is-editing');
       
+      checkbox.style.display = 'none';
+
       updateStatusPill(pill, true, data.amount);
       li.classList.toggle('card--paid', true);
       
@@ -260,7 +289,23 @@ function createCard(item, options = {}) {
     // Prevent clicking input/button from toggling the link if it bubbled (though they are in statusWrap)
     amountInput.addEventListener('click', e => e.preventDefault());
 
-    statusWrap.append(pill, amountInput, saveBtn, checkbox);
+    deleteBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (confirm('¿Eliminar este registro de pago?')) {
+        data.paid = false;
+        data.amount = null;
+        
+        checkbox.checked = false;
+        checkbox.style.display = 'inline-block';
+        updateStatusPill(pill, false, null);
+        li.classList.toggle('card--paid', false);
+        
+        persist();
+      }
+    });
+
+    statusWrap.append(pill, amountInput, saveBtn, checkbox, deleteBtn);
     li.appendChild(statusWrap);
   }
 
@@ -357,18 +402,21 @@ async function render() {
 
     updatePendingCounter();
     updateTopPayments();
+    updateTotalSum();
   } catch (err) {
     console.error(err);
   }
 }
 
-function resetAllStatuses() {
-  const confirmed = window.confirm('¿Seguro que deseas borrar todos los estados de pago?');
-  if (!confirmed) return;
-  cardStatus = {};
-  saveStatusMap();
-  render();
-  updateTopPayments();
+function toggleDeleteMode() {
+  isDeleteMode = !isDeleteMode;
+  document.body.classList.toggle('delete-mode', isDeleteMode);
+  
+  const btn = document.getElementById('reset-status-btn');
+  if (btn) {
+    btn.textContent = isDeleteMode ? 'Terminar de borrar' : 'Borrar registros';
+    btn.classList.toggle('active', isDeleteMode);
+  }
 }
 
 function init() {
@@ -376,7 +424,7 @@ function init() {
 
   const resetButton = document.getElementById('reset-status-btn');
   if (resetButton) {
-    resetButton.addEventListener('click', resetAllStatuses);
+    resetButton.addEventListener('click', toggleDeleteMode);
   }
 
   render();
