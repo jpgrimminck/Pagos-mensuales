@@ -1,7 +1,7 @@
 /* make the page fit the viewport height and avoid scrolling */
-html, body {
+/* html, body {
     height: 100%;
-}
+} */
 body {
     font-family: sans-serif;
     background-color: #f4f4f4;
@@ -10,7 +10,7 @@ body {
     padding: 12px;
     box-sizing: border-box;
     min-height: 100vh;
-    overflow-y: auto; /* allow vertical scroll */
+    /* overflow-y: auto; allow vertical scroll */
     display: flex;
     flex-direction: column;
 }
@@ -22,6 +22,16 @@ body {
     flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 18px;
+}
+
+/* make the top header stick to the viewport when scrolling */
+.page-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: #f4f4f4; /* same as page background to blend in */
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 .pending-banner {
